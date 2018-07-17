@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.myoss</groupId>
+        <artifactId>phoenix-parent</artifactId>
+        <version>1.1.0.RELEASE</version>
+    </parent>
+
+    <artifactId>phoenix-code-format</artifactId>
+    <name>phoenix-code-format</name>
+    <version>1.0.0.RELEASE</version>
+    <packaging>jar</packaging>
+
+    <description>myoss open source project, phoenix code format written in Java</description>
+    <url>https://github.com/myoss/phoenix-code-format</url>
+    <inceptionYear>2018</inceptionYear>
+
+    <scm>
+        <url>https://github.com/myoss/phoenix-code-format</url>
+        <connection>scm:git:https://github.com/myoss/phoenix-code-format.git</connection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Jerry.Chen</name>
+            <email>jerry.myoss@gmail.com</email>
+            <organizationUrl>https://github.com/myoss</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <phoenix-code-format.version>1.2.7.RELEASE</phoenix-code-format.version>
+        <phoenix-parent.version>1.1.0.RELEASE</phoenix-parent.version>
+        <phoenix-core.version>1.1.1.RELEASE</phoenix-core.version>
+    </properties>
+
+    <modules>
+    <module>code-format-eclipse</module>
+    <module>code-format-checkstyle</module>
+    </modules>
+
+    <dependencies>
+        <!-- myoss cloud dependencies start -->
+        <dependency>
+            <groupId>com.github.myoss</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>${phoenix-core.version}</version>
+        </dependency>
+        <!-- myoss cloud dependencies end -->
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.myoss</groupId>
+                <artifactId>code-format-eclipse</artifactId>
+                <version>${phoenix-code-format.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.myoss</groupId>
+                <artifactId>code-format-checkstyle</artifactId>
+                <version>${phoenix-code-format.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
