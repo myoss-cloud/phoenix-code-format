@@ -19,19 +19,19 @@ package com.github.myoss.phoenix.code.format.eclipse;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.lang3.JavaVersion;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
@@ -40,11 +40,9 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.github.myoss.phoenix.code.format.eclipse.imports.ImportsSorter;
+import com.github.myoss.phoenix.code.format.eclipse.utils.FileUtils;
 import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
 import com.github.myoss.phoenix.core.constants.PhoenixConstants;
 import com.github.myoss.phoenix.core.exception.BizRuntimeException;
@@ -76,17 +74,12 @@ public class JavaCodeFormatter {
      * @param importsSorter Java import代码格式化工具
      */
     public JavaCodeFormatter(String formatConfigFile, String formatConfigFileProfile, ImportsSorter importsSorter) {
-        Properties properties = new Properties();
-        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(formatConfigFile)) {
-            readXmlJavaSettingsFile(inputStream, properties, formatConfigFileProfile);
-        } catch (IOException ex) {
-            throw new BizRuntimeException("read file: " + formatConfigFile, ex);
-        }
+        Properties properties = FileUtils.readXmlJavaSettingsFile(formatConfigFile, formatConfigFileProfile);
         String javaVersion = JavaVersion.JAVA_RECENT.toString();
         properties.setProperty("org.eclipse.jdt.core.compiler.source", javaVersion);
         properties.setProperty("org.eclipse.jdt.core.compiler.codegen.targetPlatform", javaVersion);
         properties.setProperty("org.eclipse.jdt.core.compiler.compliance", javaVersion);
-        this.defaultCodeFormatter = new DefaultCodeFormatter(properties);
+        this.defaultCodeFormatter = new DefaultCodeFormatter(toMap(properties));
         this.importsSorter = importsSorter;
     }
 
@@ -101,7 +94,10 @@ public class JavaCodeFormatter {
      * @param importsSorter Java import代码格式化工具
      */
     public JavaCodeFormatter(ImportsSorter importsSorter) {
-        this("eclipse-formatter-config/Default-Formatter.xml", "Default", importsSorter);
+        this(Objects
+                .requireNonNull(JavaCodeFormatter.class.getClassLoader()
+                        .getResource("eclipse-formatter-config/Default-Formatter.xml"))
+                .getPath(), "Default", importsSorter);
     }
 
     /**
@@ -132,9 +128,8 @@ public class JavaCodeFormatter {
         IDocument doc = new Document();
         doc.set(text);
         int length = fileContent.length();
-        TextEdit edit = defaultCodeFormatter
-                .format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, text, 0, length, 0,
-                        ImportsUtils.N);
+        TextEdit edit = defaultCodeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS,
+                text, 0, length, 0, ImportsUtils.N);
         edit.apply(doc);
         String formatted = doc.get();
         Matcher matcher = TRAILING_SPACES.matcher(formatted);
@@ -200,55 +195,11 @@ public class JavaCodeFormatter {
         }
     }
 
-    private Properties readXmlJavaSettingsFile(InputStream file, Properties properties, String profile) {
-        int defaultSize = properties.size();
-        if (profile == null) {
-            throw new IllegalStateException("no profile selected, go to settings and select proper settings file");
+    protected Map<String, String> toMap(Properties properties) {
+        Map<String, String> options = new HashMap<>();
+        for (final String name : properties.stringPropertyNames()) {
+            options.put(name, properties.getProperty(name));
         }
-        boolean profileFound = false;
-        try {
-            // load file profiles
-            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
-            doc.getDocumentElement().normalize();
-
-            NodeList profiles = doc.getElementsByTagName("profile");
-            if (profiles.getLength() == 0) {
-                throw new IllegalStateException(
-                        "loading of profile settings failed, file does not contain any profiles");
-            }
-            for (int temp = 0; temp < profiles.getLength(); temp++) {
-                Node profileNode = profiles.item(temp);
-                if (profileNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element profileElement = (Element) profileNode;
-                    String name = profileElement.getAttribute("name");
-                    if (profile.equals(name)) {
-                        profileFound = true;
-                        NodeList childNodes = profileElement.getElementsByTagName("setting");
-                        if (childNodes.getLength() == 0) {
-                            throw new IllegalStateException(
-                                    "loading of profile settings failed, profile has no settings elements");
-                        }
-                        for (int i = 0; i < childNodes.getLength(); i++) {
-                            Node item = childNodes.item(i);
-                            if (item.getNodeType() == Node.ELEMENT_NODE) {
-                                Element attributeItem = (Element) item;
-                                String id = attributeItem.getAttribute("id");
-                                String value = attributeItem.getAttribute("value");
-                                properties.setProperty(id.trim(), value.trim());
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex.getMessage(), ex);
-        }
-        if (!profileFound) {
-            throw new IllegalStateException("profile not found in the file " + file);
-        }
-        if (properties.size() == defaultSize) {
-            throw new IllegalStateException("no properties loaded, something is broken, file:");
-        }
-        return properties;
+        return options;
     }
 }
