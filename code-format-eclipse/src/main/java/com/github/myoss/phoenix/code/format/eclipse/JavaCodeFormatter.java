@@ -62,6 +62,7 @@ public class JavaCodeFormatter {
      * 匹配行尾空格
      */
     public static final Pattern    TRAILING_SPACES = Pattern.compile("([^ \\t\\r\\n])[ \\t]+$", Pattern.MULTILINE);
+    public static final String     JAVA_VERSION    = JavaVersion.JAVA_RECENT.toString();
     protected DefaultCodeFormatter defaultCodeFormatter;
     protected ImportsSorter        importsSorter;
 
@@ -75,10 +76,9 @@ public class JavaCodeFormatter {
      */
     public JavaCodeFormatter(String formatConfigFile, String formatConfigFileProfile, ImportsSorter importsSorter) {
         Properties properties = FileUtils.readXmlJavaSettingsFile(formatConfigFile, formatConfigFileProfile);
-        String javaVersion = JavaVersion.JAVA_RECENT.toString();
-        properties.setProperty("org.eclipse.jdt.core.compiler.source", javaVersion);
-        properties.setProperty("org.eclipse.jdt.core.compiler.codegen.targetPlatform", javaVersion);
-        properties.setProperty("org.eclipse.jdt.core.compiler.compliance", javaVersion);
+        properties.setProperty("org.eclipse.jdt.core.compiler.source", JAVA_VERSION);
+        properties.setProperty("org.eclipse.jdt.core.compiler.codegen.targetPlatform", JAVA_VERSION);
+        properties.setProperty("org.eclipse.jdt.core.compiler.compliance", JAVA_VERSION);
         this.defaultCodeFormatter = new DefaultCodeFormatter(toMap(properties));
         this.importsSorter = importsSorter;
     }
@@ -87,17 +87,17 @@ public class JavaCodeFormatter {
      * Java代码格式化工具，格式化规则使用
      *
      * <pre>
-     *  eclipse-formatter-config/Default-Formatter.xml
+     *  eclipse-formatter-config/Default-Formatter-1.7.xml
+     *  eclipse-formatter-config/Default-Formatter-1.8.xml
      *  eclipse-formatter-config/Default.importorder
      * </pre>
      *
      * @param importsSorter Java import代码格式化工具
      */
     public JavaCodeFormatter(ImportsSorter importsSorter) {
-        this(Objects
-                .requireNonNull(JavaCodeFormatter.class.getClassLoader()
-                        .getResource("eclipse-formatter-config/Default-Formatter.xml"))
-                .getPath(), "Default", importsSorter);
+        this(Objects.requireNonNull(JavaCodeFormatter.class.getClassLoader()
+                .getResource("eclipse-formatter-config/Default-Formatter-" + JAVA_VERSION + ".xml")).getPath(),
+                "Default", importsSorter);
     }
 
     /**

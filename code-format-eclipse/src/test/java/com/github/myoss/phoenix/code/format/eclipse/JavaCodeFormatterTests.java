@@ -63,10 +63,15 @@ public class JavaCodeFormatterTests {
     /**
      * 比较2个配置文件的格式差异点
      */
-    //    @Test
+    @Test
     public void compareEclipseCodeFormatConfigFileTest1() {
-        String path1 = "";
-        String path2 = "";
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        String path1 = Objects
+                .requireNonNull(classLoader.getResource("eclipse-formatter-config/Default-Formatter-1.7.xml"))
+                .getPath();
+        String path2 = Objects
+                .requireNonNull(classLoader.getResource("eclipse-formatter-config/Default-Formatter-1.8.xml"))
+                .getPath();
 
         Properties properties1 = FileUtils.readXmlJavaSettingsFile(path1, "Default");
         Properties properties2 = FileUtils.readXmlJavaSettingsFile(path2, "Default");
