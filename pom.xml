@@ -12,7 +12,7 @@
     <artifactId>phoenix-code-format</artifactId>
     <name>phoenix-code-format</name>
     <version>1.0.0.RELEASE</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <description>myoss open source project, phoenix code format written in Java</description>
     <url>https://github.com/myoss/phoenix-code-format</url>
@@ -41,7 +41,7 @@
     </developers>
 
     <properties>
-        <phoenix-code-format.version>1.2.7.RELEASE</phoenix-code-format.version>
+        <phoenix-code-format.version>1.0.0.RELEASE</phoenix-code-format.version>
         <phoenix-parent.version>1.1.0.RELEASE</phoenix-parent.version>
         <phoenix-core.version>1.1.1.RELEASE</phoenix-core.version>
     </properties>

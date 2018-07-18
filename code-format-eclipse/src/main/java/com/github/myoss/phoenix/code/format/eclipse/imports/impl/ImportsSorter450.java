@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse;
+package com.github.myoss.phoenix.code.format.eclipse.imports.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,20 +24,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.github.myoss.phoenix.code.format.eclipse.imports.ImportsSorter;
+import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
 import com.google.common.collect.ArrayListMultimap;
 
 /**
- * Java import代码格式化工具 https://github.com/krasa/EclipseCodeFormatter
+ * Java import代码格式化工具
+ *
+ * <pre>
+ *     参考：https://github.com/krasa/EclipseCodeFormatter/blob/master/src/java/krasa/formatter/plugin/ImportsSorter450.java
+ * </pre>
  *
  * @author Jerry.Chen
  * @since 2018年7月17日 下午11:11:06
  */
-public class ImportsSorter450 {
-    private List<String>                      template            = new ArrayList<>();
-    private ArrayListMultimap<String, String> matchingImports     = ArrayListMultimap.create();
-    private ArrayList<String>                 notMatching         = new ArrayList<>();
-    private Set<String>                       allImportOrderItems = new HashSet<>();
-    private Comparator<String>                comparator;
+public class ImportsSorter450 implements ImportsSorter {
+    private List<String>       importOrder         = new ArrayList<>();
+    private Set<String>        allImportOrderItems = new HashSet<>();
+    private Comparator<String> comparator;
 
     /**
      * Java import代码格式化工具
@@ -48,14 +52,14 @@ public class ImportsSorter450 {
         List<String> importOrderCopy = new ArrayList<>(importOrder);
         normalizeStaticOrderItems(importOrderCopy);
         putStaticItemIfNotExists(importOrderCopy);
-        template.addAll(importOrderCopy);
+        this.importOrder.addAll(importOrderCopy);
         this.allImportOrderItems.addAll(importOrderCopy);
-        comparator = (o1, o2) -> {
-            String containerName1 = (allImportOrderItems.contains(o1) ? o1 : getPackage(o1));
-            String simpleName1 = (allImportOrderItems.contains(o1) ? "" : getSimpleName(o1));
+        this.comparator = (o1, o2) -> {
+            String containerName1 = (allImportOrderItems.contains(o1) ? o1 : ImportsUtils.getPackage(o1));
+            String simpleName1 = (allImportOrderItems.contains(o1) ? "" : ImportsUtils.getSimpleName(o1));
 
-            String containerName2 = (allImportOrderItems.contains(o2) ? o2 : getPackage(o2));
-            String simpleName2 = (allImportOrderItems.contains(o2) ? "" : getSimpleName(o2));
+            String containerName2 = (allImportOrderItems.contains(o2) ? o2 : ImportsUtils.getPackage(o2));
+            String simpleName2 = (allImportOrderItems.contains(o2) ? "" : ImportsUtils.getSimpleName(o2));
             int i = containerName1.compareTo(containerName2);
 
             if (i == 0) {
@@ -65,18 +69,16 @@ public class ImportsSorter450 {
         };
     }
 
-    /**
-     * 将 import package 进行排序
-     *
-     * @param imports import packages
-     * @return 排序之后的结果
-     */
+    @Override
     public String sort(List<String> imports) {
-        filterMatchingImports(imports);
-        mergeNotMatchingItems(false);
-        mergeNotMatchingItems(true);
-        mergeMatchingItems();
-        return getResult();
+        List<String> template = new ArrayList<>(importOrder);
+        ArrayListMultimap<String, String> matchingImports = ArrayListMultimap.create();
+        ArrayList<String> notMatching = new ArrayList<>();
+        filterMatchingImports(imports, matchingImports, notMatching);
+        mergeNotMatchingItems(false, template, notMatching);
+        mergeNotMatchingItems(true, template, notMatching);
+        mergeMatchingItems(template, matchingImports);
+        return ImportsUtils.getImportResult(template);
     }
 
     private void putStaticItemIfNotExists(List<String> allImportOrderItems) {
@@ -109,8 +111,11 @@ public class ImportsSorter450 {
      * returns not matching items and initializes internal state
      *
      * @param imports import packages
+     * @param matchingImports matched import packages
+     * @param notMatching no matched import packages
      */
-    private void filterMatchingImports(List<String> imports) {
+    private void filterMatchingImports(List<String> imports, ArrayListMultimap<String, String> matchingImports,
+                                       ArrayList<String> notMatching) {
         for (String anImport : imports) {
             String orderItem = getBestMatchingImportOrderItem(anImport);
             if (orderItem != null) {
@@ -129,7 +134,7 @@ public class ImportsSorter450 {
                 if (matchingImport == null) {
                     matchingImport = orderItem;
                 } else {
-                    matchingImport = betterMatching(matchingImport, orderItem, anImport);
+                    matchingImport = ImportsUtils.betterMatching(matchingImport, orderItem, anImport);
                 }
             }
         }
@@ -141,11 +146,13 @@ public class ImportsSorter450 {
      * appended before or after order items
      *
      * @param staticItems static import package
+     * @param template import packages template
+     * @param notMatching no matched import packages
      */
-    private void mergeNotMatchingItems(boolean staticItems) {
+    private void mergeNotMatchingItems(boolean staticItems, List<String> template, ArrayList<String> notMatching) {
         notMatching.sort(comparator);
 
-        int firstIndexOfOrderItem = getFirstIndexOfOrderItem(notMatching, staticItems);
+        int firstIndexOfOrderItem = getFirstIndexOfOrderItem(notMatching, template, staticItems);
         int indexOfOrderItem = 0;
         for (String notMatchingItem : notMatching) {
             if (!matchesStatic(staticItems, notMatchingItem)) {
@@ -163,7 +170,7 @@ public class ImportsSorter450 {
                     // no order is specified
                     if (template.size() > 0 && (template.get(template.size() - 1).startsWith("static"))) {
                         // insert N after last static import
-                        template.add(JavaCodeFormatter.N);
+                        template.add(ImportsUtils.N);
                     }
                     template.add(notMatchingItem);
                 } else {
@@ -188,7 +195,7 @@ public class ImportsSorter450 {
      * @param staticItems static import package
      * @return finds out index
      */
-    private int getFirstIndexOfOrderItem(List<String> notMatching, boolean staticItems) {
+    private int getFirstIndexOfOrderItem(List<String> notMatching, List<String> template, boolean staticItems) {
         int firstIndexOfOrderItem = 0;
         for (String notMatchingItem : notMatching) {
             if (!matchesStatic(staticItems, notMatchingItem)) {
@@ -208,7 +215,7 @@ public class ImportsSorter450 {
         return (isStatic && staticItems) || (!isStatic && !staticItems);
     }
 
-    private void mergeMatchingItems() {
+    private void mergeMatchingItems(List<String> template, ArrayListMultimap<String, String> matchingImports) {
         for (int i = 0; i < template.size(); i++) {
             String item = template.get(i);
             if (allImportOrderItems.contains(item)) {
@@ -220,80 +227,26 @@ public class ImportsSorter450 {
                     i--;
                     continue;
                 }
-                ArrayList<String> matchingItems = new ArrayList<String>(strings);
+                ArrayList<String> matchingItems = new ArrayList<>(strings);
                 matchingItems.sort(comparator);
 
                 // replace order item by matching import statements
                 // this is a mess and it is only a luck that it works :-]
                 template.remove(i);
-                if (i != 0 && !template.get(i - 1).equals(JavaCodeFormatter.N)) {
-                    template.add(i, JavaCodeFormatter.N);
+                if (i != 0 && !template.get(i - 1).equals(ImportsUtils.N)) {
+                    template.add(i, ImportsUtils.N);
                     i++;
                 }
-                if (i < template.size() && !template.get(i).equals(JavaCodeFormatter.N)
-                        && !template.get(i).equals(JavaCodeFormatter.N)) {
-                    template.add(i, JavaCodeFormatter.N);
+                if (i < template.size() && !template.get(i).equals(ImportsUtils.N)
+                        && !template.get(i).equals(ImportsUtils.N)) {
+                    template.add(i, ImportsUtils.N);
                 }
                 template.addAll(i, matchingItems);
             }
         }
         // if there is \n on the end, remove it
-        if (template.size() > 0 && template.get(template.size() - 1).equals(JavaCodeFormatter.N)) {
+        if (template.size() > 0 && template.get(template.size() - 1).equals(ImportsUtils.N)) {
             template.remove(template.size() - 1);
         }
-    }
-
-    private String getResult() {
-        StringBuilder strings = new StringBuilder();
-
-        for (String s : template) {
-            if (s.equals(JavaCodeFormatter.N)) {
-                strings.append(s);
-            } else {
-                strings.append("import ").append(s).append(";").append(JavaCodeFormatter.N);
-            }
-        }
-        return strings.deleteCharAt(strings.length() - 1).toString();
-    }
-
-    private String getSimpleName(String s) {
-        int lastDot = s.lastIndexOf(".");
-        if (lastDot == -1) {
-            return s;
-        }
-        return s.substring(lastDot + 1, s.length());
-    }
-
-    private String getPackage(String s) {
-        int lastDot = s.lastIndexOf(".");
-        if (lastDot == -1) {
-            return "";
-        }
-        return s.substring(0, lastDot);
-    }
-
-    private String betterMatching(String order1, String order2, String anImport) {
-        if (order1.equals(order2)) {
-            throw new IllegalArgumentException("orders are same");
-        }
-        for (int i = 0; i < anImport.length() - 1; i++) {
-            if (order1.length() - 1 == i && order2.length() - 1 != i) {
-                return order2;
-            }
-            if (order2.length() - 1 == i && order1.length() - 1 != i) {
-                return order1;
-            }
-            char orderChar1 = (order1.length() != 0 ? order1.charAt(i) : ' ');
-            char orderChar2 = (order2.length() != 0 ? order2.charAt(i) : ' ');
-            char importChar = anImport.charAt(i);
-
-            if (importChar == orderChar1 && importChar != orderChar2) {
-                return order1;
-            } else if (importChar != orderChar1 && importChar == orderChar2) {
-                return order2;
-            }
-
-        }
-        return null;
     }
 }
