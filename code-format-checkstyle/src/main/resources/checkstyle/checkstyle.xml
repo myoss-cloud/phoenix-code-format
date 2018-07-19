@@ -3,6 +3,7 @@
 <module name="com.puppycrawl.tools.checkstyle.Checker">
     <!-- 使用 UTF-8 读取文件内容 -->
     <property name="charset" value="UTF-8"/>
+    <module name="SuppressWarningsFilter"/>
 
     <!-- 文件通用检查 -->
     <module name="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck">
@@ -21,6 +22,7 @@
 
     <!-- Annotations -->
     <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
+        <module name="SuppressWarningsHolder"/>
         <module name="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck">
             <property name="elementStyle" value="compact"/>
         </module>
