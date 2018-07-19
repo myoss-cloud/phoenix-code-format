@@ -9,6 +9,7 @@
         <version>1.1.0.RELEASE</version>
     </parent>
 
+    <groupId>com.github.myoss.checkstyle</groupId>
     <artifactId>phoenix-code-format</artifactId>
     <name>phoenix-code-format</name>
     <version>1.0.0.RELEASE</version>
