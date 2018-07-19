@@ -34,7 +34,7 @@
                     <dependency>
                         <groupId>io.spring.javaformat</groupId>
                         <artifactId>spring-javaformat-checkstyle</artifactId>
-                        <version>0.0.5</version>
+                        <version>${spring-javaformat-checkstyle.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>

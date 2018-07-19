@@ -42,10 +42,16 @@
     </developers>
 
     <properties>
+        <!-- myoss cloud -->
         <phoenix-code-format.version>1.0.0.RELEASE</phoenix-code-format.version>
         <phoenix-parent.version>1.1.0.RELEASE</phoenix-parent.version>
         <phoenix-core.version>1.1.1.RELEASE</phoenix-core.version>
-        <puppycrawl-tools-checkstyle.version>8.11</puppycrawl-tools-checkstyle.version>
+        <!-- myoss cloud -->
+
+        <!-- third party -->
+        <puppycrawl-tools-checkstyle.version>8.10</puppycrawl-tools-checkstyle.version>
+        <spring-javaformat-checkstyle.version>0.0.5</spring-javaformat-checkstyle.version>
+        <!-- third party -->
     </properties>
 
     <modules>
