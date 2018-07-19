@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.myoss.eclipse</groupId>
             <artifactId>eclipse-code-formatter</artifactId>
-            <version>17.3.132.637.0.Eclipse_4.7</version>
+            <version>18.0.132.637.0-Eclipse_4.7.3a</version>
         </dependency>
     </dependencies>
 </project>
