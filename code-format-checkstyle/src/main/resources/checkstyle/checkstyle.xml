@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="com.puppycrawl.tools.checkstyle.Checker">
+    <!-- 使用 UTF-8 读取文件内容 -->
+    <property name="charset" value="UTF-8"/>
+
+    <!-- 文件通用检查 -->
+    <module name="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck">
+        <property name="headerFile" value="${checkstyle.header.file}"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
+    <module name="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck">
+        <property name="lineSeparator" value="lf"/>
+    </module>
+    <module name="FileLength">
+        <!-- 检查文件的行数 -->
+        <property name="max" value="3000"/>
+    </module>
+    <!-- 文件不允许有 tab 字符 -->
+    <module name="FileTabCharacter"/>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="System\.out\.println"/>
+        <property name="message" value="禁止使用 System.out.println !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="System\.out\.print"/>
+        <property name="message" value="禁止使用 System.out.print !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="\.printStackTrace()"/>
+        <property name="message" value="禁止使用 ex.printStacktrace() !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="java\.util\.Calendar"/>
+        <property name="message" value="请使用 Java 8 新的日期 API，比如：java.time.LocalDateTime/java.time.LocalDate !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="org\.apache\.commons\.lang\.\S+"/>
+        <property name="message" value="禁止使用 org.apache.commons.lang 旧依赖，请使用 org.apache.commons.lang3 新依赖 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="org\.apache\.commons\.logging\.\S+"/>
+        <property name="message" value="禁止使用 org.apache.commons.logging 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="lombok\.extern\.apachecommons\.CommonsLog"/>
+        <property name="message" value="禁止使用 lombok.extern.apachecommons.CommonsLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="lombok\.extern\.java\.Log"/>
+        <property name="message" value="禁止使用 lombok.extern.java.Log 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="lombok\.extern\.jbosslog\.JBossLog"/>
+        <property name="message" value="禁止使用 lombok.extern.jbosslog.JBossLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="lombok\.extern\.log4j\.Log4j"/>
+        <property name="message" value="禁止使用 lombok.extern.log4j.Log4j 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="lombok\.extern\.log4j\.Log4j2"/>
+        <property name="message" value="禁止使用 lombok.extern.log4j.Log4j2 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+    </module>
+    <module name="RegexpSingleline">
+        <property name="format" value="io\.swagger\.\S+"/>
+        <property name="message" value="禁止使用 io.swagger 依赖 !"/>
+    </module>
+
+    <!-- Annotations -->
+    <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck">
+            <property name="elementStyle" value="compact"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.PackageAnnotationCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationLocationCheck">
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+        </module>
+
+        <!-- Block Checks -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.EmptyBlockCheck">
+            <property name="option" value="text"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck">
+            <property name="tokens" value="LITERAL_ELSE"/>
+            <property name="option" value="alone"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.AvoidNestedBlocksCheck"/>
+
+        <!-- Class Design -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.FinalClassCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.InterfaceIsTypeCheck"/>
+        <!--<module name="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck" />-->
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.MutableExceptionCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.InnerTypeLastCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.OneTopLevelClassCheck"/>
+
+        <!-- Coding -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.CovariantEqualsCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.EqualsHashCodeCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.InnerAssignmentCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanExpressionCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.StringLiteralEqualityCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.NestedForDepthCheck">
+            <property name="max" value="3"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck">
+            <property name="max" value="3"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.NestedTryDepthCheck">
+            <property name="max" value="3"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.OneStatementPerLineCheck"/>
+        <!-- 包名的检查（只允许小写字母） -->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <!-- 检查是否导入的包没有使用-->
+        <module name="UnusedImports"/>
+        <module name="ConstantName">
+            <property name="format" value="(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)|(^logger)"/>
+        </module>
+        <!--Checks that local, non-final variable names conform to producerGroup format specified by the format property-->
+        <module name="LocalVariableName"/>
+        <!--Validates identifiers for local, final variables, including catch parameters-->
+        <module name="LocalFinalVariableName"/>
+        <!--Validates identifiers for non-static fields-->
+        <module name="MemberName"/>
+        <!--Validates identifiers for class type parameters-->
+        <module name="ClassTypeParameterName">
+            <property name="format" value="(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)"/>
+        </module>
+        <!--Validates identifiers for method type parameters-->
+        <module name="MethodTypeParameterName">
+            <property name="format" value="(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)"/>
+        </module>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName">
+            <property name="format" value="(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)"/>
+        </module>
+        <module name="TypeName">
+            <property name="format" value="(^[A-Z][a-zA-Z0-9]*$)|(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)"/>
+        </module>
+
+        <!-- Imports -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.IllegalImportCheck">
+            <!-- 不允许导入 sun, org.apache.commons.lang, org.apache.commons.logging 的package -->
+            <property name="illegalPkgs" value="sun, org\.apache\.commons\.(lang|logging)\.\S+"/>
+            <property name="regexp" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck">
+            <property name="processJavadoc" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck">
+            <property name="groups" value="java,/^javax?\./,org,com,*"/>
+            <property name="ordered" value="true"/>
+            <property name="separated" value="true"/>
+            <property name="option" value="top"/>
+            <property name="sortStaticImportsAlphabetically" value="true"/>
+        </module>
+
+        <!-- Javadoc Comments -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck">
+            <property name="scope" value="package"/>
+            <property name="authorFormat" value=".+\s?.+"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+            <property name="scope" value="public"/>
+            <property name="allowMissingJavadoc" value="false"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+            <property name="scope" value="protected"/>
+            <property name="allowMissingJavadoc" value="false"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+            <property name="scope" value="private"/>
+            <property name="allowMissingJavadoc" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck">
+            <property name="scope" value="public"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck">
+            <property name="checkFirstSentence" value="false"/>
+            <property name="checkEmptyJavadoc" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.NonEmptyAtclauseDescriptionCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck">
+            <property name="offset" value="0"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck">
+            <property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF"/>
+            <property name="tagOrder" value="@param, @author, @since, @see, @version, @serial, @deprecated"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck">
+            <property name="target" value="METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
+            <property name="tagOrder" value="@param, @return, @throws, @since, @deprecated, @see"/>
+        </module>
+
+        <!-- Miscellaneous -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck">
+            <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.OuterTypeFilenameCheck"/>
+
+        <!-- Modifiers -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.modifier.RedundantModifierCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck"/>
+
+        <!-- Regexp -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineJavaCheck">
+            <property name="maximum" value="0"/>
+            <property name="format" value="org\.mockito\.Mockito\.(when|doThrow|doAnswer)"/>
+            <property name="message"
+                      value="Please use BDDMockito imports."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineJavaCheck">
+            <property name="maximum" value="0"/>
+            <property name="format" value="org\.junit\.Assert\.assert"/>
+            <property name="message"
+                      value="Please use AssertJ imports."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck">
+            <property name="format" value="[ \t]+$"/>
+            <property name="illegalPattern" value="true"/>
+            <property name="message" value="Trailing whitespace"/>
+        </module>
+
+        <!-- Whitespace -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.GenericWhitespaceCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.MethodParamPadCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.NoWhitespaceAfterCheck">
+            <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS, ARRAY_DECLARATOR"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.NoWhitespaceBeforeCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.ParenPadCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.TypecastParenPadCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAfterCheck"/>
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="4"/>
+            <property name="arrayInitIndent" value="8"/>
+            <property name="lineWrappingIndentation" value="8"/>
+        </module>
+        <module name="TrailingComment"/>
+
+        <!-- Spring Conventions -->
+        <module name="io.spring.javaformat.checkstyle.check.SpringTernaryCheck"/>
+    </module>
+</module>
