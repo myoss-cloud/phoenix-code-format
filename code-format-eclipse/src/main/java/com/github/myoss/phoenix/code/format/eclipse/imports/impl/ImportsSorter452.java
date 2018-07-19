@@ -59,6 +59,11 @@ public class ImportsSorter452 implements ImportsSorter {
         this.allImportOrderItems.addAll(importOrderCopy);
     }
 
+    /**
+     * Java import代码格式化工具
+     *
+     * @param comparator 自定义排序规则
+     */
     public ImportsSorter452(ImportsComparator comparator) {
         this(null, comparator);
     }
@@ -147,8 +152,8 @@ public class ImportsSorter452 implements ImportsSorter {
      * @param matchingImports matched import packages
      * @param notMatching no matched import packages
      */
-    private void filterMatchingImports(ArrayListMultimap<String, String> matchingImports,
-                                       ArrayList<String> notMatching, List<String> imports) {
+    private void filterMatchingImports(ArrayListMultimap<String, String> matchingImports, ArrayList<String> notMatching,
+                                       List<String> imports) {
         for (String anImport : imports) {
             String orderItem = getBestMatchingImportOrderItem(anImport);
             if (orderItem != null) {
@@ -164,7 +169,7 @@ public class ImportsSorter452 implements ImportsSorter {
         String matchingImport = null;
         for (String orderItem : allImportOrderItems) {
             if (anImport.startsWith(
-            // 4.5.1+ matches exact package name
+                    // 4.5.1+ matches exact package name
                     "static ".equals(orderItem) || "".equals(orderItem) ? orderItem : orderItem + ".")) {
                 if (matchingImport == null) {
                     matchingImport = orderItem;
