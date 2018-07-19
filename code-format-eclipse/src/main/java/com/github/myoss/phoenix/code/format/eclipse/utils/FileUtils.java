@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,6 +39,23 @@ import com.github.myoss.phoenix.core.exception.BizRuntimeException;
  * @since 2018年7月19日 上午2:40:55
  */
 public class FileUtils {
+    /**
+     * 读取 Eclipse 代码格式化规则文件，转换为 properties
+     *
+     * @param formatConfigFile EclipseCodeFormatter 格式化规则文件路径
+     * @param formatConfigFileProfile EclipseCodeFormatter 格式化规则文件中的 name
+     *            属性，具体使用哪个 profile
+     * @return 格式化规则属性配置
+     */
+    public static Properties readXmlJavaSettingsFile(URL formatConfigFile, String formatConfigFileProfile) {
+        Properties properties = new Properties();
+        try (InputStream inputStream = formatConfigFile.openStream()) {
+            return readXmlJavaSettingsFile(inputStream, properties, formatConfigFileProfile);
+        } catch (IOException ex) {
+            throw new BizRuntimeException("read file: " + formatConfigFile, ex);
+        }
+    }
+
     /**
      * 读取 Eclipse 代码格式化规则文件，转换为 properties
      *

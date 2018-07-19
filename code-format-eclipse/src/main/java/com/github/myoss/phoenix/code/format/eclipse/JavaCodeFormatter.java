@@ -19,6 +19,7 @@ package com.github.myoss.phoenix.code.format.eclipse;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,9 +63,38 @@ public class JavaCodeFormatter {
      * 匹配行尾空格
      */
     public static final Pattern    TRAILING_SPACES = Pattern.compile("([^ \\t\\r\\n])[ \\t]+$", Pattern.MULTILINE);
+    /**
+     * 当前项目使用的 Java 版本
+     */
     public static final String     JAVA_VERSION    = JavaVersion.JAVA_RECENT.toString();
     protected DefaultCodeFormatter defaultCodeFormatter;
     protected ImportsSorter        importsSorter;
+
+    /**
+     * Java代码格式化工具
+     *
+     * @param properties EclipseCodeFormatter 格式化规则
+     * @param importsSorter Java import代码格式化工具
+     */
+    public JavaCodeFormatter(Properties properties, ImportsSorter importsSorter) {
+        properties.setProperty("org.eclipse.jdt.core.compiler.source", JAVA_VERSION);
+        properties.setProperty("org.eclipse.jdt.core.compiler.codegen.targetPlatform", JAVA_VERSION);
+        properties.setProperty("org.eclipse.jdt.core.compiler.compliance", JAVA_VERSION);
+        this.defaultCodeFormatter = new DefaultCodeFormatter(toMap(properties));
+        this.importsSorter = importsSorter;
+    }
+
+    /**
+     * Java代码格式化工具
+     *
+     * @param formatConfigFile EclipseCodeFormatter 格式化规则文件路径
+     * @param formatConfigFileProfile EclipseCodeFormatter 格式化规则文件中的 name
+     *            属性，具体使用哪个 profile
+     * @param importsSorter Java import代码格式化工具
+     */
+    public JavaCodeFormatter(URL formatConfigFile, String formatConfigFileProfile, ImportsSorter importsSorter) {
+        this(FileUtils.readXmlJavaSettingsFile(formatConfigFile, formatConfigFileProfile), importsSorter);
+    }
 
     /**
      * Java代码格式化工具
@@ -75,12 +105,7 @@ public class JavaCodeFormatter {
      * @param importsSorter Java import代码格式化工具
      */
     public JavaCodeFormatter(String formatConfigFile, String formatConfigFileProfile, ImportsSorter importsSorter) {
-        Properties properties = FileUtils.readXmlJavaSettingsFile(formatConfigFile, formatConfigFileProfile);
-        properties.setProperty("org.eclipse.jdt.core.compiler.source", JAVA_VERSION);
-        properties.setProperty("org.eclipse.jdt.core.compiler.codegen.targetPlatform", JAVA_VERSION);
-        properties.setProperty("org.eclipse.jdt.core.compiler.compliance", JAVA_VERSION);
-        this.defaultCodeFormatter = new DefaultCodeFormatter(toMap(properties));
-        this.importsSorter = importsSorter;
+        this(FileUtils.readXmlJavaSettingsFile(formatConfigFile, formatConfigFileProfile), importsSorter);
     }
 
     /**
@@ -96,8 +121,8 @@ public class JavaCodeFormatter {
      */
     public JavaCodeFormatter(ImportsSorter importsSorter) {
         this(Objects.requireNonNull(JavaCodeFormatter.class.getClassLoader()
-                .getResource("eclipse-formatter-config/Default-Formatter-" + JAVA_VERSION + ".xml")).getPath(),
-                "Default", importsSorter);
+                .getResource("eclipse-formatter-config/Default-Formatter-" + JAVA_VERSION + ".xml")), "Default",
+                importsSorter);
     }
 
     /**
@@ -195,7 +220,7 @@ public class JavaCodeFormatter {
         }
     }
 
-    protected Map<String, String> toMap(Properties properties) {
+    private Map<String, String> toMap(Properties properties) {
         Map<String, String> options = new HashMap<>();
         for (final String name : properties.stringPropertyNames()) {
             options.put(name, properties.getProperty(name));
