@@ -1,4 +1,4 @@
-# phoenix-mybatis
+# phoenix-code-format
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.myoss/phoenix-code-format/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.myoss/phoenix-code-format/)
 [![GitHub release](https://img.shields.io/github/release/myoss-cloud/phoenix-code-format.svg)](https://github.com/myoss-cloud/phoenix-code-format/releases)
@@ -20,8 +20,16 @@
 
 ```xml
 <dependency>
-    <groupId>com.github.myoss</groupId>
-    <artifactId>phoenix-code-format</artifactId>
+    <groupId>com.github.myoss.checkstyle</groupId>
+    <artifactId>code-format-eclipse</artifactId>
+    <version>1.0.0.RELEASE</version>
+</dependency>
+```
+
+```xml
+<dependency>
+    <groupId>com.github.myoss.checkstyle</groupId>
+    <artifactId>code-format-checkstyle</artifactId>
     <version>1.0.0.RELEASE</version>
 </dependency>
 ```
