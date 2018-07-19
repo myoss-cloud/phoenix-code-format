@@ -19,55 +19,6 @@
     <!-- 文件不允许有 tab 字符 -->
     <module name="FileTabCharacter"/>
 
-    <module name="RegexpSingleline">
-        <property name="format" value="System\.out\.println"/>
-        <property name="message" value="禁止使用 System.out.println !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="System\.out\.print"/>
-        <property name="message" value="禁止使用 System.out.print !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="\.printStackTrace()"/>
-        <property name="message" value="禁止使用 ex.printStacktrace() !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="java\.util\.Calendar"/>
-        <property name="message" value="请使用 Java 8 新的日期 API，比如：java.time.LocalDateTime/java.time.LocalDate !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="org\.apache\.commons\.lang\.\S+"/>
-        <property name="message" value="禁止使用 org.apache.commons.lang 旧依赖，请使用 org.apache.commons.lang3 新依赖 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="org\.apache\.commons\.logging\.\S+"/>
-        <property name="message" value="禁止使用 org.apache.commons.logging 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="lombok\.extern\.apachecommons\.CommonsLog"/>
-        <property name="message" value="禁止使用 lombok.extern.apachecommons.CommonsLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="lombok\.extern\.java\.Log"/>
-        <property name="message" value="禁止使用 lombok.extern.java.Log 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="lombok\.extern\.jbosslog\.JBossLog"/>
-        <property name="message" value="禁止使用 lombok.extern.jbosslog.JBossLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="lombok\.extern\.log4j\.Log4j"/>
-        <property name="message" value="禁止使用 lombok.extern.log4j.Log4j 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="lombok\.extern\.log4j\.Log4j2"/>
-        <property name="message" value="禁止使用 lombok.extern.log4j.Log4j2 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
-    </module>
-    <module name="RegexpSingleline">
-        <property name="format" value="io\.swagger\.\S+"/>
-        <property name="message" value="禁止使用 io.swagger 依赖 !"/>
-    </module>
-
     <!-- Annotations -->
     <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
         <module name="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck">
@@ -221,21 +172,69 @@
         <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineJavaCheck">
             <property name="maximum" value="0"/>
             <property name="format" value="org\.mockito\.Mockito\.(when|doThrow|doAnswer)"/>
-            <property name="message"
-                      value="Please use BDDMockito imports."/>
-            <property name="ignoreComments" value="true"/>
-        </module>
-        <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineJavaCheck">
-            <property name="maximum" value="0"/>
-            <property name="format" value="org\.junit\.Assert\.assert"/>
-            <property name="message"
-                      value="Please use AssertJ imports."/>
+            <property name="message" value="Please use BDDMockito imports."/>
             <property name="ignoreComments" value="true"/>
         </module>
         <module name="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck">
             <property name="format" value="[ \t]+$"/>
             <property name="illegalPattern" value="true"/>
             <property name="message" value="Trailing whitespace"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="System\.out\.println"/>
+            <property name="message" value="禁止使用 System.out.println !"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="System\.out\.print"/>
+            <property name="message" value="禁止使用 System.out.print !"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="\.printStackTrace()"/>
+            <property name="message" value="禁止使用 ex.printStacktrace() !"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="java\.util\.Calendar"/>
+            <property name="message" value="请使用 Java 8 新的日期 API，比如：java.time.LocalDateTime/java.time.LocalDate !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="org\.apache\.commons\.lang\.\S+"/>
+            <property name="message" value="禁止使用 org.apache.commons.lang 旧依赖，请使用 org.apache.commons.lang3 新依赖 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="org\.apache\.commons\.logging\.\S+"/>
+            <property name="message" value="禁止使用 org.apache.commons.logging 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="lombok\.extern\.apachecommons\.CommonsLog"/>
+            <property name="message" value="禁止使用 lombok.extern.apachecommons.CommonsLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="lombok\.extern\.java\.Log"/>
+            <property name="message" value="禁止使用 lombok.extern.java.Log 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="lombok\.extern\.jbosslog\.JBossLog"/>
+            <property name="message" value="禁止使用 lombok.extern.jbosslog.JBossLog 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="lombok\.extern\.log4j\.Log4j"/>
+            <property name="message" value="禁止使用 lombok.extern.log4j.Log4j 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="lombok\.extern\.log4j\.Log4j2"/>
+            <property name="message" value="禁止使用 lombok.extern.log4j.Log4j2 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="io\.swagger\.\S+"/>
+            <property name="message" value="禁止使用 io.swagger 依赖 !"/>
         </module>
 
         <!-- Whitespace -->
