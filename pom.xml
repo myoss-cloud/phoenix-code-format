@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>com.github.myoss.checkstyle</groupId>
-    <artifactId>phoenix-code-format</artifactId>
-    <name>phoenix-code-format</name>
+    <artifactId>code-format-parent</artifactId>
+    <name>code-format-parent</name>
     <version>1.0.0.RELEASE</version>
     <packaging>pom</packaging>
 
@@ -45,7 +45,7 @@
         <phoenix-code-format.version>1.0.0.RELEASE</phoenix-code-format.version>
         <phoenix-parent.version>1.1.0.RELEASE</phoenix-parent.version>
         <phoenix-core.version>1.1.1.RELEASE</phoenix-core.version>
-        <puppycrawl-tools-checkstyle.version>8.10</puppycrawl-tools-checkstyle.version>
+        <puppycrawl-tools-checkstyle.version>8.11</puppycrawl-tools-checkstyle.version>
     </properties>
 
     <modules>
@@ -76,12 +76,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.myoss</groupId>
+                <groupId>com.github.myoss.checkstyle</groupId>
                 <artifactId>code-format-eclipse</artifactId>
                 <version>${phoenix-code-format.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.myoss</groupId>
+                <groupId>com.github.myoss.checkstyle</groupId>
                 <artifactId>code-format-checkstyle</artifactId>
                 <version>${phoenix-code-format.version}</version>
             </dependency>

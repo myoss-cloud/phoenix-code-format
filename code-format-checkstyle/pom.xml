@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.myoss.checkstyle</groupId>
-        <artifactId>phoenix-code-format</artifactId>
+        <artifactId>code-format-parent</artifactId>
         <version>1.0.0.RELEASE</version>
     </parent>
 
