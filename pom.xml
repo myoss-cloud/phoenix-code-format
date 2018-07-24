@@ -12,7 +12,7 @@
     <groupId>com.github.myoss.checkstyle</groupId>
     <artifactId>code-format-parent</artifactId>
     <name>code-format-parent</name>
-    <version>1.0.1.RELEASE</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <description>myoss open source project, phoenix code format written in Java</description>
@@ -43,7 +43,7 @@
 
     <properties>
         <!-- myoss cloud -->
-        <phoenix-code-format.version>1.0.1.RELEASE</phoenix-code-format.version>
+        <phoenix-code-format.version>1.0.2-SNAPSHOT</phoenix-code-format.version>
         <phoenix-parent.version>1.1.1.RELEASE</phoenix-parent.version>
         <phoenix-core.version>1.1.1.RELEASE</phoenix-core.version>
         <!-- myoss cloud -->
