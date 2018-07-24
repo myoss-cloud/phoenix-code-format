@@ -1,6 +1,6 @@
 # phoenix-code-format
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.myoss.checkstyle/code-format-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.myoss.checkstyle/code-format-parent/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.myoss.checkstyle/code-format-parent.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.myoss.checkstyle/code-format-parent/)
 [![GitHub release](https://img.shields.io/github/release/myoss-cloud/phoenix-code-format.svg)](https://github.com/myoss-cloud/phoenix-code-format/releases)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
