@@ -15,14 +15,13 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse.imports.impl;
+package app.myoss.cloud.code.format.eclipse.imports.impl;
 
 import java.util.Comparator;
 
 import org.apache.commons.lang3.ClassUtils;
 
-import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
-
+import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**

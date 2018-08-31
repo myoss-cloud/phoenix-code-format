@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse.utils;
+package app.myoss.cloud.code.format.eclipse.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.github.myoss.phoenix.core.exception.BizRuntimeException;
+import app.myoss.cloud.core.exception.BizRuntimeException;
 
 /**
  * 文件工具类

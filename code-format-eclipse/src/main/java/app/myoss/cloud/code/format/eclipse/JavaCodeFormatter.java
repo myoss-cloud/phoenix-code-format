@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse;
+package app.myoss.cloud.code.format.eclipse;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,13 +42,13 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
 
-import com.github.myoss.phoenix.code.format.eclipse.imports.ImportsSorter;
-import com.github.myoss.phoenix.code.format.eclipse.utils.FileUtils;
-import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
-import com.github.myoss.phoenix.core.constants.PhoenixConstants;
-import com.github.myoss.phoenix.core.exception.BizRuntimeException;
 import com.google.common.io.Files;
 
+import app.myoss.cloud.code.format.eclipse.imports.ImportsSorter;
+import app.myoss.cloud.code.format.eclipse.utils.FileUtils;
+import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
+import app.myoss.cloud.core.constants.PhoenixConstants;
+import app.myoss.cloud.core.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
 /**

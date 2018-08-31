@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse;
+package app.myoss.cloud.code.format.eclipse;
 
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -32,13 +32,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.github.myoss.phoenix.code.format.eclipse.imports.ImportsSorter;
-import com.github.myoss.phoenix.code.format.eclipse.imports.impl.ImportsComparator;
-import com.github.myoss.phoenix.code.format.eclipse.imports.impl.ImportsSorter452;
-import com.github.myoss.phoenix.code.format.eclipse.utils.FileUtils;
-import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
-import com.github.myoss.phoenix.core.exception.BizRuntimeException;
 
+import app.myoss.cloud.code.format.eclipse.imports.ImportsSorter;
+import app.myoss.cloud.code.format.eclipse.imports.impl.ImportsComparator;
+import app.myoss.cloud.code.format.eclipse.imports.impl.ImportsSorter452;
+import app.myoss.cloud.code.format.eclipse.utils.FileUtils;
+import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
+import app.myoss.cloud.core.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -112,7 +112,7 @@ public class JavaCodeFormatterTests {
             return targetFolder.getParent()
                     .getParent()
                     .getParent()
-                    .resolve("phoenix-core")
+                    .resolve("myoss-cloud-projects")
                     .resolve(childDirectorName)
                     .toString();
         } else {

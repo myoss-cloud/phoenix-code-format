@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse.imports.impl;
+package app.myoss.cloud.code.format.eclipse.imports.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,9 +24,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.myoss.phoenix.code.format.eclipse.imports.ImportsSorter;
-import com.github.myoss.phoenix.code.format.eclipse.utils.ImportsUtils;
 import com.google.common.collect.ArrayListMultimap;
+
+import app.myoss.cloud.code.format.eclipse.imports.ImportsSorter;
+import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
 
 /**
  * Java import代码格式化工具

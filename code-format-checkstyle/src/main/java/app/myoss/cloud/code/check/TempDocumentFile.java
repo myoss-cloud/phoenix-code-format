@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.check;
+package app.myoss.cloud.code.check;
 
 /**
  * 用于生成 Java Doc，目前项目没有代码

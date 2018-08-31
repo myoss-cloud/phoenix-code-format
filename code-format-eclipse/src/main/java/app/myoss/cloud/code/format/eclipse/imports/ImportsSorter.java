@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse.imports;
+package app.myoss.cloud.code.format.eclipse.imports;
 
 import java.util.List;
 import java.util.stream.Collectors;

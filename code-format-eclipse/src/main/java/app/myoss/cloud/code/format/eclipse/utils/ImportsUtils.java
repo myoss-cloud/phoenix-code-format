@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.myoss.phoenix.code.format.eclipse.utils;
+package app.myoss.cloud.code.format.eclipse.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,10 +28,9 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.github.myoss.phoenix.core.constants.PhoenixConstants;
-import com.github.myoss.phoenix.core.exception.BizRuntimeException;
-import com.github.myoss.phoenix.core.lang.io.StreamUtil;
-
+import app.myoss.cloud.core.constants.PhoenixConstants;
+import app.myoss.cloud.core.exception.BizRuntimeException;
+import app.myoss.cloud.core.lang.io.StreamUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
