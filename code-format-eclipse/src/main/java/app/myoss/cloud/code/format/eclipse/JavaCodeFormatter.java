@@ -47,7 +47,7 @@ import com.google.common.io.Files;
 import app.myoss.cloud.code.format.eclipse.imports.ImportsSorter;
 import app.myoss.cloud.code.format.eclipse.utils.FileUtils;
 import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
-import app.myoss.cloud.core.constants.PhoenixConstants;
+import app.myoss.cloud.core.constants.MyossConstants;
 import app.myoss.cloud.core.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -176,14 +176,14 @@ public class JavaCodeFormatter {
         StringBuilder fileContent = new StringBuilder();
         File sourceFile = new File(filePath);
         try {
-            Files.asCharSource(sourceFile, PhoenixConstants.DEFAULT_CHARSET).copyTo(fileContent);
+            Files.asCharSource(sourceFile, MyossConstants.DEFAULT_CHARSET).copyTo(fileContent);
         } catch (IOException ex) {
             throw new BizRuntimeException("read file: " + filePath, ex);
         }
 
         try {
             String formatted = formatText(fileContent);
-            Files.asCharSink(sourceFile, PhoenixConstants.DEFAULT_CHARSET).write(formatted);
+            Files.asCharSink(sourceFile, MyossConstants.DEFAULT_CHARSET).write(formatted);
             return true;
         } catch (Exception ex) {
             log.error("format by eclipse formatter failed: " + filePath, ex);

@@ -99,7 +99,7 @@ public class JavaCodeFormatterTests {
         log.info("不同属性 path2: {} \n{}", path2, JSON.toJSONString(properties2, true));
     }
 
-    public static String getRootOutputPath(String childDirectorName, boolean isPhoenixCoreSrc) {
+    public static String getRootOutputPath(String childDirectorName, boolean isMyossStarterProjectsSrc) {
         Objects.requireNonNull(childDirectorName);
         Path targetFolder;
         try {
@@ -108,11 +108,11 @@ public class JavaCodeFormatterTests {
             throw new BizRuntimeException(ex);
         }
         Objects.requireNonNull(targetFolder);
-        if (isPhoenixCoreSrc) {
+        if (isMyossStarterProjectsSrc) {
             return targetFolder.getParent()
                     .getParent()
                     .getParent()
-                    .resolve("myoss-cloud-projects")
+                    .resolve("myoss-starter-projects")
                     .resolve(childDirectorName)
                     .toString();
         } else {

@@ -6,22 +6,22 @@
     <parent>
         <groupId>app.myoss.cloud</groupId>
         <artifactId>spring-boot-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.0.1.RELEASE</version>
     </parent>
 
     <groupId>app.myoss.cloud.codestyle</groupId>
     <artifactId>java-code-style</artifactId>
     <name>java-code-style</name>
-    <version>2.0.0.RELEASE</version>
+    <version>2.0.1.RELEASE</version>
     <packaging>pom</packaging>
 
     <description>myoss open source project, code style &amp; format written in Java</description>
-    <url>https://github.com/myoss/java-code-style</url>
+    <url>https://github.com/myoss-cloud/java-code-style</url>
     <inceptionYear>2018</inceptionYear>
 
     <scm>
-        <url>https://github.com/myoss/java-code-style</url>
-        <connection>scm:git:https://github.com/myoss/java-code-style.git</connection>
+        <url>https://github.com/myoss-cloud/java-code-style</url>
+        <connection>scm:git:https://github.com/myoss-cloud/java-code-style.git</connection>
     </scm>
 
     <licenses>
@@ -37,15 +37,12 @@
         <developer>
             <name>Jerry.Chen</name>
             <email>jerry.work@aliyun.com</email>
-            <organizationUrl>https://github.com/myoss</organizationUrl>
+            <organizationUrl>https://github.com/myoss-cloud</organizationUrl>
+            <url>https://github.com/myoss</url>
         </developer>
     </developers>
 
     <properties>
-        <!-- myoss cloud -->
-        <myoss-cloud.java-code-style.version>2.0.0.RELEASE</myoss-cloud.java-code-style.version>
-        <!-- myoss cloud -->
-
         <!-- third party -->
         <puppycrawl-tools-checkstyle.version>8.10</puppycrawl-tools-checkstyle.version>
         <spring-javaformat-checkstyle.version>0.0.5</spring-javaformat-checkstyle.version>
@@ -60,24 +57,9 @@
     <dependencies>
         <!-- myoss cloud dependencies start -->
         <dependency>
-            <groupId>app.myoss.cloud</groupId>
-            <artifactId>myoss-cloud-core</artifactId>
+            <groupId>app.myoss.cloud.boot</groupId>
+            <artifactId>myoss-starter-core</artifactId>
         </dependency>
         <!-- myoss cloud dependencies end -->
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>app.myoss.cloud.codestyle</groupId>
-                <artifactId>code-format-eclipse</artifactId>
-                <version>${myoss-cloud.java-code-style.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>app.myoss.cloud.codestyle</groupId>
-                <artifactId>code-format-checkstyle</artifactId>
-                <version>${myoss-cloud.java-code-style.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

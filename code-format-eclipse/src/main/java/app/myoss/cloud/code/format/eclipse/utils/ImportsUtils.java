@@ -28,7 +28,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 
-import app.myoss.cloud.core.constants.PhoenixConstants;
+import app.myoss.cloud.core.constants.MyossConstants;
 import app.myoss.cloud.core.exception.BizRuntimeException;
 import app.myoss.cloud.core.lang.io.StreamUtil;
 import lombok.AccessLevel;
@@ -155,7 +155,7 @@ public class ImportsUtils {
         Properties formatterOptions;
         try (InputStream stream = ImportsUtils.class.getClassLoader().getResourceAsStream(file)) {
             formatterOptions = new Properties();
-            String s = StreamUtil.copyToString(stream, PhoenixConstants.DEFAULT_CHARSET);
+            String s = StreamUtil.copyToString(stream, MyossConstants.DEFAULT_CHARSET);
             StringReader reader = new StringReader(s.replace("=\\#", "=#"));
             formatterOptions.load(reader);
         } catch (IOException ex) {
