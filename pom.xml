@@ -44,7 +44,7 @@
 
     <properties>
         <!-- third party -->
-        <puppycrawl-tools-checkstyle.version>8.10</puppycrawl-tools-checkstyle.version>
+        <puppycrawl-tools-checkstyle.version>8.18</puppycrawl-tools-checkstyle.version>
         <spring-javaformat-checkstyle.version>0.0.5</spring-javaformat-checkstyle.version>
         <!-- third party -->
     </properties>
