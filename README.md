@@ -32,7 +32,7 @@
 <dependency>
     <groupId>app.myoss.cloud.codestyle</groupId>
     <artifactId>code-format-eclipse</artifactId>
-    <version>2.1.0.RELEASE</version>
+    <version>2.1.1.RELEASE</version>
 </dependency>
 ```
 
@@ -40,6 +40,6 @@
 <dependency>
     <groupId>app.myoss.cloud.codestyle</groupId>
     <artifactId>code-format-checkstyle</artifactId>
-    <version>2.1.0.RELEASE</version>
+    <version>2.1.1.RELEASE</version>
 </dependency>
 ```
