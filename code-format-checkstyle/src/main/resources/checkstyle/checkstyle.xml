@@ -259,8 +259,5 @@
             <property name="lineWrappingIndentation" value="8"/>
         </module>
         <module name="TrailingComment"/>
-
-        <!-- Spring Conventions -->
-        <module name="io.spring.javaformat.checkstyle.check.SpringTernaryCheck"/>
     </module>
 </module>

@@ -58,11 +58,6 @@
                         <artifactId>checkstyle</artifactId>
                         <version>${puppycrawl-tools-checkstyle.version}</version>
                     </dependency>
-                    <dependency>
-                        <groupId>io.spring.javaformat</groupId>
-                        <artifactId>spring-javaformat-checkstyle</artifactId>
-                        <version>${spring-javaformat-checkstyle.version}</version>
-                    </dependency>
                 </dependencies>
                 <executions>
                     <execution>
