@@ -124,9 +124,10 @@
         <!-- Javadoc Comments -->
         <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck">
             <property name="scope" value="package"/>
+            <property name="allowMissingParamTags" value="true"/>
             <property name="authorFormat" value=".+\s?.+"/>
         </module>
-        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+        <!--<module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
             <property name="scope" value="public"/>
             <property name="allowMissingJavadoc" value="false"/>
         </module>
@@ -144,7 +145,7 @@
         <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck">
             <property name="checkFirstSentence" value="false"/>
             <property name="checkEmptyJavadoc" value="true"/>
-        </module>
+        </module>-->
         <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.NonEmptyAtclauseDescriptionCheck"/>
         <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck">
             <property name="offset" value="0"/>
