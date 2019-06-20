@@ -38,7 +38,7 @@
         </example>
     </rule>
 
-    <rule name="AvoidComplexConditionRule"
+    <!--<rule name="AvoidComplexConditionRule"
           language="java"
           message="java.flowcontrol.AvoidComplexConditionRule.rule.msg"
           class="com.alibaba.p3c.pmd.lang.java.rule.flowcontrol.AvoidComplexConditionRule">
@@ -62,7 +62,7 @@ Positive example:
     }
 			]]>
         </example>
-    </rule>
+    </rule>-->
 
     <rule name="AvoidNegationOperatorRule"
           language="java"
