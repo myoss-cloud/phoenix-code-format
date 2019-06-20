@@ -24,7 +24,7 @@ Positive example:
          </example>
     </rule>
 
-    <rule name="UndefineMagicConstantRule"
+    <!--<rule name="UndefineMagicConstantRule"
         message="java.constant.UndefineMagicConstantRule.rule.msg"
         class="com.alibaba.p3c.pmd.lang.java.rule.constant.UndefineMagicConstantRule">
         <priority>3</priority>
@@ -47,6 +47,6 @@ Positive example:
     }
       ]]>
       </example>
-    </rule>
+    </rule>-->
 
 </ruleset>
