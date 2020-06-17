@@ -114,6 +114,7 @@ public class JavaCodeFormatter {
      * <pre>
      *  eclipse-formatter-config/Default-Formatter-1.7.xml
      *  eclipse-formatter-config/Default-Formatter-1.8.xml
+     *  eclipse-formatter-config/Default-Formatter-11.0.xml
      *  eclipse-formatter-config/Default.importorder
      * </pre>
      *
