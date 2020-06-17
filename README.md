@@ -15,7 +15,7 @@
 - [maven][1]
 - [the latest JAR][2]
 
-[1]: http://repo1.maven.org/maven2/app/myoss/cloud/codestyle/code-format-eclipse/  
+[1]: https://repo1.maven.org/maven2/app/myoss/cloud/codestyle/code-format-eclipse/  
 [2]: https://search.maven.org/remote_content?g=app.myoss.cloud.codestyle&a=code-format-eclipse&v=LATEST
 
 ### code-format-checkstyle
@@ -23,7 +23,7 @@
 - [maven][3]
 - [the latest JAR][4]
 
-[3]: http://repo1.maven.org/maven2/app/myoss/cloud/codestyle/code-format-checkstyle/  
+[3]: https://repo1.maven.org/maven2/app/myoss/cloud/codestyle/code-format-checkstyle/  
 [4]: https://search.maven.org/remote_content?g=app.myoss.cloud.codestyle&a=code-format-checkstyle&v=LATEST
 
 ## Maven
