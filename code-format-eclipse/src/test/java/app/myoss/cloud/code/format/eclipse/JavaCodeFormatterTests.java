@@ -31,14 +31,13 @@ import org.eclipse.jface.text.BadLocationException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
-
 import app.myoss.cloud.code.format.eclipse.imports.ImportsSorter;
 import app.myoss.cloud.code.format.eclipse.imports.impl.ImportsComparator;
 import app.myoss.cloud.code.format.eclipse.imports.impl.ImportsSorter452;
 import app.myoss.cloud.code.format.eclipse.utils.FileUtils;
 import app.myoss.cloud.code.format.eclipse.utils.ImportsUtils;
 import app.myoss.cloud.core.exception.BizRuntimeException;
+import app.myoss.cloud.core.lang.json.JsonApi;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -94,9 +93,9 @@ public class JavaCodeFormatterTests {
 
         log.info("path1 和 path2 配置{}", ((properties1.size() == 0 && properties2.size() == 0) ? "相同" : "不相同"));
         log.info("\n");
-        log.info("不同属性 path1: {} \n{}", path1, JSON.toJSONString(properties1, true));
+        log.info("不同属性 path1: {} \n{}", path1, JsonApi.toJson(properties1));
         log.info("\n");
-        log.info("不同属性 path2: {} \n{}", path2, JSON.toJSONString(properties2, true));
+        log.info("不同属性 path2: {} \n{}", path2, JsonApi.toJson(properties2));
     }
 
     public static String getRootOutputPath(String childDirectorName, boolean isMyossStarterProjectsSrc) {
