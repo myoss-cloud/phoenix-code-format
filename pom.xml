@@ -7,7 +7,7 @@
     <groupId>app.myoss.cloud.codestyle</groupId>
     <artifactId>java-code-style</artifactId>
     <name>java-code-style</name>
-    <version>2.1.5.RELEASE</version>
+    <version>2.1.6.RELEASE</version>
     <packaging>pom</packaging>
 
     <description>myoss open source project, code style &amp; format written in Java</description>
