@@ -235,10 +235,10 @@
             <property name="message" value="禁止使用 lombok.extern.log4j.Log4j2 输出日志，请使用 org.slf4j.Logger 输出日志 !"/>
             <property name="ignoreComments" value="true"/>
         </module>
-        <module name="RegexpSinglelineJava">
+        <!--<module name="RegexpSinglelineJava">
             <property name="format" value="io\.swagger\.\S+"/>
             <property name="message" value="禁止使用 io.swagger 依赖 !"/>
-        </module>
+        </module>-->
 
         <!-- Whitespace -->
         <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.GenericWhitespaceCheck"/>
